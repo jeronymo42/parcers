@@ -3,4 +3,5 @@
 *.wav
 *.mp3
 *.acc
+*.ogg
 config.py
