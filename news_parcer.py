@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from config import RAPID_KEY
 
 page = requests.get('https://www.reuters.com/').text
 soup = BeautifulSoup(page, 'lxml')
@@ -9,7 +10,7 @@ for head in headings:
     url = "https://just-translated.p.rapidapi.com/"
     querystring = {"lang":"ru","text":head.get_text()}
     headers = {
-        "X-RapidAPI-Key": "92af0f50a7mshe8d5d778a336cabp1b6ad1jsnc0fb44049545",
+        "X-RapidAPI-Key": RAPID_KEY,
         "X-RapidAPI-Host": "just-translated.p.rapidapi.com"
     }
     header_tr = requests.get(url, headers=headers, params=querystring).json()['text']
