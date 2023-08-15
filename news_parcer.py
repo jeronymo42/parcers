@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from config import RAPID_KEY
+from config import RAPID_KEY, VOICE_KEY
 
 page = requests.get('https://www.reuters.com/').text
 soup = BeautifulSoup(page, 'lxml')
@@ -20,7 +20,7 @@ print(*result, sep='\n')
 with open('news.wav', 'wb') as file:
     all_headers = '\n Следующая новость: '.join(result)
     url = "https://voicerss-text-to-speech.p.rapidapi.com/"
-    querystring = {"key":"c0fc965e24164039badddf70bbbc6742"}
+    querystring = {"key":VOICE_KEY}
     payload = {
         "src": all_headers,
         "hl": "ru-ru",
@@ -31,7 +31,7 @@ with open('news.wav', 'wb') as file:
     }
     headers = {
         "content-type": "application/x-www-form-urlencoded",
-        "X-RapidAPI-Key": "92af0f50a7mshe8d5d778a336cabp1b6ad1jsnc0fb44049545",
+        "X-RapidAPI-Key": RAPID_KEY,
         "X-RapidAPI-Host": "voicerss-text-to-speech.p.rapidapi.com"
     }
     response = requests.post(url, data=payload, headers=headers, params=querystring).content
